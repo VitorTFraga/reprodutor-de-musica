@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>Spotify</title>
+
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:ital@1&family=Square+Peg&display=swap" rel="stylesheet">
+
+	<script src="https://kit.fontawesome.com/2287aa3250.js" crossorigin="anonymous"></script>
+
+</head>
+<body>
+	<div class="sidebar">
+		<div class="sidebar-wraper">
+
+			<div class="sidebar__logo">
+				<img src="Img/Spotify_Logo_RGB_White.png">
+
+			</div>
+
+			<div class="sidebar__menu">
+				<a class="sidebar__menu__selecionada" href="#"><i class="fa-solid fa-house"></i> inicio</a>
+
+				<a href="#"><i class="fa-solid fa-magnifying-glass"></i> busca</a>
+
+				<a href="#"><i class="fa-solid fa-book"></i> biblioteca</a>
+
+			</div>
+
+			<div class="sidebar__menu">
+				<p class="sidebar__menu__title">playlists</p>
+
+				<div class="sidebar__menu__item">
+					<div class="sidebar__menu__item__componente">
+						+
+					</div>
+					<span>criar playlist</span>
+					
+				</div>
+				<div class="sidebar__menu__item">
+					<img src="Img/musicas_curtidas.jpg">
+					<span>musicas curtidas</span>
+					
+				</div>
+			</div>
+
+			<div class="sidebar__playlist">
+					<a href="">playlist</a>
+					<a href="">playlist</a>
+					
+			</div>
+
+			<div class="sidebar__playlist">
+					<a href="">playlist</a>
+					<a href="">playlist</a>
+					
+			</div>
+
+			<div class="sidebar__playlist">
+					<a href="">playlist</a>
+					<a href="">playlist</a>
+					
+			</div>
+		</div><!--side bar menu wraper-->
+	</div>
+	<div class="main">
+
+		<div class="main__wraper">
+
+			<div class="main__row">
+			
+				<div class="main__row__title"><h2>DAILY MIX</h2></div>
+
+				<div class="main__col">
+					
+					<img src="Img/dayli mix1.jpg">
+					<h3>Daily Mix 1</h3>
+					<p>artistas no "album".</p>
+				</div>
+
+				<div class="main__col">
+					
+					<img src="Img/daily mix2.jpg">
+					<h3>Daily Mix 2</h3>
+					<p>artistas no "album".</p>
+				</div>
+
+				<div class="main__col">
+					
+					<img src="Img/daily mix3.jpg">
+					<h3>Daily Mix 3</h3>
+					<p>artistas no "album".</p>
+				</div>
+
+				<div class="main__col">
+					
+					<img src="Img/daily mix4.jpg">
+					<h3>Daily Mix 4</h3>
+					<p>artistas no "album".</p>
+				</div>
+
+				<div class="main__col">
+					
+					<img src="Img/daily mix5.jpg">
+					<h3>Daily Mix 5</h3>
+					<p>artistas no "album".</p>
+				</div>
+
+				<div class="main__col">
+					
+					<img src="Img/daily mix6.jpg">
+					<h3>Daily Mix 6</h3>
+					<p>artistas no "album".</p>
+				</div>
+			</div><!--fim do row-->
+			<div class="main__row">
+				
+				<div class="main__row__title"><h2>Minhas Musicas</h2></div>
+
+				<div class="main__col" data-image="Img/minhas_musicas.jpg" data-artist="Audio teste" data-song="nome da musica" data-file="Assets/audio_teste.ogg">
+					
+					<img src="Img/minhas_musicas.jpg">
+					<h3>Audio teste</h3>
+					<p>teste para o reprodutor de musica</p>
+				</div>
+
+				<div class="main__col" data-image="Img/minhas_musicas.jpg" data-artist="Vitor Taboas Fraga" data-song="historias do Vitor" data-file="Assets/audio_teste_2.ogg">
+					
+					<img src="Img/minhas_musicas.jpg">
+					<h3>Vitor Taboas</h3>
+					<p>meu dia</p>
+				</div>
+
+			</div>
+		</div><!--fim dos wraper-->
+	</div><!--fim do main-->
+
+	<div class="display">
+		
+		<div class="display__artist">
+			
+
+		</div><!--fim do D-artist-->
+		<div class="display__control">
+			
+			<div class="display__control__button">
+				
+				<a href="#"><i class="fa-solid fa-backward"></i></a>
+				<a style="display: none;" id="pauseBtn" href="#"><i class="fa-solid fa-pause"></i></a>
+				<a id="playBtn" href="#"><i class="fa-solid fa-play"></i></a>
+				<a href="#"><i class="fa-solid fa-forward"></i></a>
+			</div>
+
+			<div class="display__control__progress">
+
+				<div style="width: 0%;" class="display__control__progress__2"></div>
+			</div>
+		</div><!--fim do D-control-->
+	</div><!--fim do display-->
+
+
+	<!--começo do JS -->
+
+
+
+	<audio id="audioDisplay" style="position: absolute; left: 0; top: 0;display: none;" controls=""></audio>
+
+
+	<script>
+		
+		var audioDisplay =document.getElementById("audioDisplay");
+		var loaded = false;
+		var playBtn = document.getElementById("playBtn");
+		var pauseBtn = document.getElementById("pauseBtn");
+
+		document.getElementById("pauseBtn").addEventListener("click", (e)=>{
+
+			e.preventDefault();
+
+			playBtn.style.display = "inline";
+			pauseBtn.style.display = "none";
+			audioDisplay.pause();
+			return false;
+		});
+
+		document.getElementById("playBtn").addEventListener("click", (e)=>{
+
+			e.preventDefault();
+
+			playBtn.style.display = "none";
+			pauseBtn.style.display = "inline";
+			audioDisplay.play();
+			return false;
+		});
+
+		const playSong = (file) => {
+			
+			if (loaded == false) {
+
+				audioDisplay.innerHTML = "<source src="+file+" type = 'audio/ogg'/>";
+				loaded = true;
+			}
+			audioDisplay.play();
+
+			playBtn.style.display = "none";
+			pauseBtn.style.display = "inline";
+		}
+
+		document.querySelectorAll(".main__col").forEach(item =>{
+
+			item.addEventListener("click", event =>{
+				let image = item.getAttribute("data-image");
+				let artist = item.getAttribute("data-artist");
+				let song = item.getAttribute("data-song");
+				let file = item.getAttribute("data-file");
+
+
+				let displayArtistComponent = document.getElementsByClassName("display__artist");
+
+				displayArtistComponent[0].innerHTML = `
+					<Img src="${image}"/>
+					<h3>`+artist+`</br><span>`+song+`</span></h3>`;
+
+
+				playSong(file);
+			});
+
+		});
+	</script>
+</body>
+</html>
